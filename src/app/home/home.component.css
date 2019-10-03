@@ -1,0 +1,27 @@
+@import url("https://fonts.google.com/specimen/Lexend+Zetta");
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #1879ba;
+  border-radius: 10px;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  font-family: 'Lexend Zetta', sans-serif;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #116aa6;
+}
