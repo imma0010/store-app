@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -9,30 +10,35 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class SignupComponent implements OnInit {
 
   userForm = this.fb.group({
-    firstName: ['', Validators.required],
-    middleName: [''],
-    lastName: ['', Validators.required],
-    userName: ['', Validators.required],
+    first_name: ['', Validators.required],
+    middle_name: [''],
+    last_name: ['', Validators.required],
+    username: ['', Validators.required],
     address: ['', Validators.required],
     contact: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-    password2: ['', Validators.required]
+    password: ['', Validators.required]
   });
+
+  password2: any;
 
   errors = [];
 
   passwordcomperr: boolean;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private http: HttpClient) { }
 
   ngOnInit() {
     this.passwordcomperr = false;
   }
 
   onRegister() {
-    if (this.userForm.value.password === this.userForm.value.password2) {
+    if (this.userForm.value.password === this.password2) {
       console.log('User Form: ', this.userForm.value);
+      this.http.post('http://localhost:1337/users', this.userForm.value)
+        .subscribe(result => {
+          console.log(result);
+        });
     } else {
       this.errors.push('Password does not match');
       console.log('Password does not match');

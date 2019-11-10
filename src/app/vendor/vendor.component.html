@@ -1,1 +1,10 @@
-<p>vendor works!</p>
+<div *ngFor="let vendor of vendors">
+    <mat-card style="width: 90%; margin-left: 5%; margin-right: 5%;">
+        <mat-card-content>
+            {{vendor.name}}<br>
+            {{vendor.address}}<br>
+            {{vendor.contact}}<br>
+            Total Number of Product Sold
+        </mat-card-content>
+    </mat-card><br>
+</div>

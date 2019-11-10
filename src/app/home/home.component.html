@@ -1,9 +1,17 @@
 <ul>
     <li><a routerLink="/">Home</a></li>
-    <li><a routerLink="/vendor" routerLinkActive="active">Vendors</a></li>
+    <div *ngIf="userView"><li><a routerLink="/vendor" routerLinkActive="active">Vendors</a></li></div>
     <li><a routerLink="/" routerLinkActive="active">Products</a></li>
     <li><a routerLink="/aboutus" routerLinkActive="active">About Us</a></li>
-    <li style="float:right"><a routerLink="/signup" routerLinkActive="active">Sign Up</a></li>
-    <li style="float:right"><a routerLink="/login" routerLinkActive="active">Login</a></li>
+    <div *ngIf="vendorView"><li><a routerLink="/my-product" routerLinkActive="active">My Product</a></li></div>
+    <div *ngIf="!(userView || vendorView)">
+        <li style="float:right"><a routerLink="/signup" routerLinkActive="active">Sign Up</a></li>
+        <li style="float:right"><a routerLink="/login" routerLinkActive="active">Login</a></li>
+    </div>
+    <div *ngIf='userView || vendorView'>
+        <li (click)="logOut()" style="float: right; font-family: 'Lexend Zetta', sans-serif; display: block; text-align: center; padding: 14px 16px; text-decoration: none; color: white;">Log Out</li>
+        <div *ngIf="userView"><li style="float: right; font-family: 'Lexend Zetta', sans-serif; display: block; text-align: center; padding: 14px 16px; text-decoration: none; color: white;">{{username}}</li></div>
+        <div *ngIf="vendorView"><li style="float: right;"><a href="#">{{name}}</a></li></div>
+    </div>
 </ul>
 <router-outlet></router-outlet>

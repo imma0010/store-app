@@ -1,1 +1,29 @@
-<p>login works!</p>
+<div class="row d-flex justify-content-center">
+    <mat-card class="col-md-4">
+        <mat-card-header>
+            <mat-card-title>Log In</mat-card-title>
+        </mat-card-header>
+        <form [formGroup]="loginForm">
+            <div class="row justify-content-center">
+                    <mat-form-field class="col-md-6">
+                        <input type="text" matInput placeholder="Username or Email" formControlName="username" required>
+                        <mat-error *ngIf="loginForm.get('username').hasError('required')">
+                            Username or Email is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+            </div>
+            <div class="row justify-content-center">
+                
+            <mat-form-field class="col-md-6">
+                    <input type="password" matInput placeholder="Password" formControlName="password" required>
+                    <mat-error *ngIf="loginForm.get('password').hasError('required')">
+                        Password is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row justify-content-center">
+            <button mat-raised-button color="primary" (click)="login()" class="col-md-6">Login</button>
+        </div>
+        </form>
+    </mat-card>
+</div>

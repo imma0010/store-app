@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-vendor',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VendorComponent implements OnInit {
 
-  constructor() { }
+  vendors: any;
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.http.get('http://localhost:1337/vendors').subscribe(
+      vendor => {
+        this.vendors = vendor;
+      }
+    );
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-vendorsignup',
@@ -13,17 +14,29 @@ export class VendorsignupComponent implements OnInit {
     address: ['', Validators.required],
     contact: ['', Validators.required],
     email: ['', Validators.required],
-    password: ['', Validators.required],
-    password2: ['', Validators.required]
+    password: ['', Validators.required]
   });
 
-  constructor(private fb: FormBuilder) { }
+  result: any;
+
+  password2 = "";
+
+  constructor(private fb: FormBuilder, private http: HttpClient) { }
 
   ngOnInit() {
   }
 
   onRegisterVendor() {
-    console.log('Vendor Form', this.vendorForm);
+    if(this.vendorForm.value.password === this.password2) {
+      console.log('Vendor Form', this.vendorForm);
+      this.http.post('http://localhost:1337/vendors', this.vendorForm.value)
+        .subscribe(result => {
+          this.result = result;
+          console.log(result);
+        });
+    } else {
+      console.log('Password does not match');
+    }
   }
 
 }
